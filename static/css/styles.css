@@ -63,7 +63,7 @@ body {
   cursor: pointer;
   background-image: url("../images/arrow.svg");
   background-repeat: no-repeat;
-  background-position: left bottom;
+  background-position: left calc(67vw / 3) bottom;
 }
 
 .character-description-container {
@@ -226,6 +226,9 @@ body {
 @media screen and (max-width: 1440px) {
   .grid {
     column-gap: 2em;
+  }
+  .arrow {
+    margin-left: 30px;
   }
 }
 
