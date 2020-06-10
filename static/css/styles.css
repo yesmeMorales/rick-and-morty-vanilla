@@ -2,6 +2,23 @@ body {
   margin: 0;
   background: #00a5be;
   font-family: system-ui;
+  overflow-x: hidden;
+}
+
+.character-name-placeholder {
+  color: rgba(0, 0, 0, 0.1);
+  font-size: 600px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  z-index: 1;
+  white-space: nowrap;
 }
 
 .logo {
@@ -11,6 +28,8 @@ body {
 }
 
 .grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   height: calc(100vh - 8em);
   padding: 4em;
@@ -274,6 +293,7 @@ body {
   }
 
   .arrow {
+    user-select: none;
     background-position: center;
     height: 50px;
   }
