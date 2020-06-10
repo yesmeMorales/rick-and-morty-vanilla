@@ -2,11 +2,22 @@ import API from "./api.js";
 import Character from "./character.js";
 
 const api = new API();
-let currentCharacter = 4;
+let currentCharacter = 1;
 const $loadNext = document.querySelector("#load-next");
+const $loadBefore = document.querySelector("#load-before");
 
 $loadNext.addEventListener("click", async () => {
   const characterData = await api.getCharacter(++currentCharacter);
+  new Character(characterData);
+});
+
+$loadBefore.addEventListener("click", async () => {
+  let characterData;
+  if (currentCharacter > 1) {
+    characterData = await api.getCharacter(--currentCharacter);
+    new Character(characterData);
+  }
+  characterData = await api.getCharacter(currentCharacter);
   new Character(characterData);
 });
 

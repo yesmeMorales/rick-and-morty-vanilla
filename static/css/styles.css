@@ -3,6 +3,18 @@ body {
   background: #00a5be;
   font-family: system-ui;
   overflow-x: hidden;
+  background-image: url("../images/asset-red.svg");
+  background-position: left 200px top;
+  background-repeat: no-repeat;
+}
+
+.placeholder-container {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 
 .character-name-placeholder {
@@ -36,7 +48,7 @@ body {
   grid-template-columns: 50px 1fr 1fr 200px;
   grid-template-rows: 230px 120px 1fr 1fr 1fr;
   column-gap: 8em;
-  grid-template-areas: "asset-top logo logo social" "name character-name avatar avatar" "about character-description avatar avatar" "asset-bottom character-text avatar avatar" "asset-bottom learn-more arrow another-line";
+  grid-template-areas: "asset-top logo logo social" "name character-name avatar avatar" "about character-description avatar avatar" "asset-bottom character-text avatar avatar" "asset-bottom learn-more arrow arrow";
 }
 
 .asset {
@@ -77,12 +89,78 @@ body {
   justify-content: center;
 }
 
-.arrow {
+@keyframes nudge {
+  0% {
+    transform: translate(150px, 0);
+  }
+
+  50%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes bounce-in-top {
+  0% {
+    transform: translateY(-500px);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-65px);
+    animation-timing-function: ease-in;
+  }
+  72% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  81% {
+    transform: translateY(-28px);
+    animation-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  95% {
+    transform: translateY(-8px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+.character-image {
+  /* animation: nudge 2s ease-in forwards normal; */
+  animation: bounce-in-top 2s both;
+}
+
+.arrows {
   grid-area: arrow;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.arrow-left {
+  /* grid-area: arrow; */
   cursor: pointer;
-  background-image: url("../images/arrow.svg");
-  background-repeat: no-repeat;
-  background-position: left calc(67vw / 3) bottom;
+  background-size: 45px 45px;
+  /* background-image: url("../images/arrow-left.svg");
+  background-repeat: no-repeat; */
+  /* background-position: left calc(67vw / 3) top; */
+}
+
+.arrow-right {
+  cursor: pointer;
+  background-size: 45px 45px;
 }
 
 .character-description-container {
@@ -150,7 +228,6 @@ body {
 .navigation .text {
   display: inline-flex;
   margin: 20px 0;
-  /* margin-inline: 35px; */
 }
 
 .dot {
@@ -175,7 +252,6 @@ body {
 }
 
 .character-image {
-  height: 100%;
   max-width: 100%;
   /* width: auto; */
   border-radius: 50%;
@@ -183,7 +259,20 @@ body {
 }
 
 .character-name {
+  position: relative;
   font-size: 30px;
+}
+
+.character-name h2:after {
+  content: "";
+  margin-left: 15px;
+  width: 70px;
+  height: 6px;
+  background: #f7391c;
+  display: inline-flex;
+  position: absolute;
+  left: calc(100% + 5px);
+  top: 50%;
 }
 
 .character-label {
@@ -191,7 +280,6 @@ body {
   padding: 1em;
   color: white;
   border-radius: 10px;
-  /* display: inline-flex; */
   text-align: left;
   font-size: 25px;
   font-weight: 400px;
@@ -221,16 +309,6 @@ body {
     display: inline-flex;
   }
 
-  .character-name h2:after {
-    content: "";
-    width: 85px;
-    height: 6px;
-    background: #f7391c;
-    display: inline-flex;
-    position: absolute;
-    left: calc(100% + 5px);
-    top: 50%;
-  }
 
   .character-labels {
     grid-area: labels;
@@ -245,9 +323,6 @@ body {
 @media screen and (max-width: 1440px) {
   .grid {
     column-gap: 2em;
-  }
-  .arrow {
-    margin-left: 30px;
   }
 }
 
@@ -277,6 +352,11 @@ body {
     text-align: center;
   }
 
+  .character-name h2:after {
+    left: 0;
+    top: calc(100% - 20px);
+  }
+
   .character-name-container {
     margin-top: 1em;
     justify-content: center;
@@ -290,12 +370,6 @@ body {
   .learn-more {
     display: none;
     padding-inline-start: 1em;
-  }
-
-  .arrow {
-    user-select: none;
-    background-position: center;
-    height: 50px;
   }
 
   .social a {
