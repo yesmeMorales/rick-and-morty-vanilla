@@ -6,4 +6,19 @@ export default class API {
     // .then((response) => response.json())
     // .then((data) => data);
   }
+
+  async getAllCharacters() {
+    const characters = await fetch(
+      "https://rickandmortyapi.com/api/character/"
+    );
+    return characters.json();
+  }
+
+  async getCharacterByName(name) {
+    const character = await fetch(
+      `https://rickandmortyapi.com/api/character/?name=${name}`
+    );
+    const data = (await character).json();
+    return data;
+  }
 }
